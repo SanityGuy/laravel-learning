@@ -16,4 +16,17 @@ class DashboardController extends Controller
             'tasks' => Task::latest()->get(),
         ]);
     }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'due_date' => ['nullable', 'date'],
+        ]);
+
+        Task::create($validated);
+
+        return redirect('/')->with('success','Task created successfully!');
+    }
 }
