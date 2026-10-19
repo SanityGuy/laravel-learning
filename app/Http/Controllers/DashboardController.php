@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,6 +13,7 @@ class DashboardController extends Controller
             'name' => 'Souyan Zakharov',
             'project' => 'Laravel Starter',
             'stack' => ['PHP', 'Laravel', 'Vite', 'TailwindCSS'],
+            'tasks' => Task::latest()->get(),
         ]);
     }
 }
