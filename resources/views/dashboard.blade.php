@@ -15,7 +15,7 @@
             <h1 class="text-4xl text-slate-100 inline-block">{{ $project }}</h1>
             <h3 class="text-2xl text-slate-300 inline-block">
                 Made by
-                <a href="github.com/SanityGuy" class="font-bold text-sky-500 hover:text-sky-600 shadow-lg"
+                <a href="https://github.com/SanityGuy" class="font-bold text-sky-500 hover:text-sky-600 shadow-lg"
                     target="_blank" rel="noreferrer" title="Github Page">{{ $name }}</a>
             </h3>
             <div class="max-w-xl p-5 bg-slate-900 rounded-xl shadow-lg mt-2">
@@ -26,7 +26,7 @@
                     @endforeach
                 </div>
             </div>
-            <p class="text-xl mt-2 font-sm text-slate-200">Want to know more? <a href="/about"
+            <p class="text-xl mt-2 text-sm text-slate-200">Want to know more? <a href="/about"
                     class="font-bold text-sky-500 hover:text-sky-600 shadow-lg">Click here</a></p>
         </div>
     </section>
@@ -85,7 +85,7 @@
 
             <button type="submit"
                 class="inline-block rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-400">
-                Create task
+                Create New Task
             </button>
         </form>
     </section>
@@ -95,23 +95,58 @@
         </h2>
 
         @forelse ($tasks as $task)
-            <article class="mb-3 rounded-xl border border-slate-800 bg-slate-900 p-4 text-left">
-                <h3 class="text-lg font-semibold text-white">
-                    {{ $task->title }}
-                </h3>
+            <article class="mb-5 mt-5 rounded-xl border border-slate-800 bg-slate-900 p-4 text-left">
 
-                <p class="mt-1 text-slate-400">
-                    {{ $task->description }}
-                </p>
+                <div class="m-1 flex flex-col">
+                    <h3 class="text-xl font-semibold text-white">
+                        {{ $task->title }}
+                        <span class="inline-block ml-1 mb-1 rounded-full bg-slate-800 px-3 py-2 text-sm text-blue-300">
+                            {{ str_replace('_', ' ', ucfirst($task->status)) }}
+                        </span>
+                    </h3>
 
-                <span class="mt-3 inline-block rounded-full bg-slate-800 px-3 py-1 text-sm text-blue-300">
-                    {{ str_replace('_', ' ', ucfirst($task->status)) }}
-                </span>
+                    <p class="mt-1 text-slate-400">
+                        {{ $task->description }}
+                    </p>
+                </div>
 
-                <a href="{{ route('tasks.edit', $task) }}"
-                    class="inline-block rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-400">
-                    Edit Task
-                </a>
+                <div class="flex flex-col gap-2 p-2 px-2 py-2 bg-slate-800 mt-3 rounded-xl">
+                    <h1 class="text-base font-bold text-slate-500 m-1">
+                        Quick Actions
+                    </h1>
+                    <hr class="w-full text-slate-700 mb-2" />
+                    <div class="flex flex-row gap-2">
+                        @foreach (['pending', 'in_progress', 'completed'] as $status)
+                            <form action="{{ route('tasks.status', $task) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+
+                                <input type="hidden" name="status" value="{{ $status }}">
+
+                                <button type="submit" @disabled($task->status === $status)
+                                    class="rounded-lg border border-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-500 disabled:cursor-not-allowed disabled:opacity-40">
+                                    {{ str($status)->replace('_', ' ')->title() }}
+                                </button>
+                            </form>
+                        @endforeach
+                        <div class="w-0.5 h-10 bg-slate-700"></div>
+                        <a href="{{ route('tasks.edit', $task) }}"
+                            class="rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-400">
+                            Edit Task
+                        </a>
+
+                        <form action="{{ route('tasks.destroy', $task) }}" method="POST"
+                            onsubmit="return confirm('Are you sure you want to delete this task?')">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit"
+                                class="rounded-lg bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-400">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </article>
         @empty
             <p class="text-slate-400">

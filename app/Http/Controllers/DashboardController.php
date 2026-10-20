@@ -48,4 +48,22 @@ class DashboardController extends Controller
 
         return redirect('/')->with('success','Task updated successfully!');
     }
+
+    public function setStatus(Request $request, Task $task)
+    {
+        $validated = $request->validate([
+            'status' => ['required', 'in:pending,in_progress,completed'],
+        ]);
+
+        $task->update($validated);
+
+        return redirect('/')->with('success', 'Task status updated successfully!');
+    }
+
+    public function destroy(Task $task)
+    {
+        $task->delete();
+
+        return redirect('/')->with('success','Task deleted succesfully!');
+    }
 }
