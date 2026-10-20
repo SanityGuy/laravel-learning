@@ -8,3 +8,5 @@ use App\Models\Task;
 Route::get("/", [DashboardController::class,"index"]);
 Route::get('/about', [AboutController::class, "index"]);
 Route::post('/tasks', [DashboardController::class,'store'])->name('tasks.store');
+Route::get('/tasks/{task}/edit', [DashboardController::class,'edit'])->name('tasks.edit');
+Route::put('/tasks/{task}', [DashboardController::class,'update'])->name('tasks.update');

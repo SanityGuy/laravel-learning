@@ -12,8 +12,12 @@
 <body class="flex flex-col min-h-[100vh] justify-center items-center text-center bg-slate-950">
     <section class="mt-8 w-full max-w-4xl px-4">
         <div class="flex flex-col gap-2 items-center text-slate-100 font-medium shadow-lg w-full">
-            <h1 class="text-3xl sm:text-5xl font-bold">Welcome to {{ $name }}'s Project!</h1>
-            <p class="text-3xl">The project is called {{ $project }}.</p>
+            <h1 class="text-4xl text-slate-100 inline-block">{{ $project }}</h1>
+            <h3 class="text-2xl text-slate-300 inline-block">
+                Made by
+                <a href="github.com/SanityGuy" class="font-bold text-sky-500 hover:text-sky-600 shadow-lg"
+                    target="_blank" rel="noreferrer" title="Github Page">{{ $name }}</a>
+            </h3>
             <div class="max-w-xl p-5 bg-slate-900 rounded-xl shadow-lg mt-2">
                 <p class="text-2xl">The project is made using these stacks:</p>
                 <div class="flex gap-2 items-center justify-center mt-5">
@@ -22,8 +26,8 @@
                     @endforeach
                 </div>
             </div>
-            <p class="text-xl mt-2 font-sm text-slate-200">Want to see more? <a href="/about"
-                    class="font-bold text-blue-500 hover:text-blue-600 shadow-lg">Click here</a></p>
+            <p class="text-xl mt-2 font-sm text-slate-200">Want to know more? <a href="/about"
+                    class="font-bold text-sky-500 hover:text-sky-600 shadow-lg">Click here</a></p>
         </div>
     </section>
     <section class="mt-8 w-full max-w-2xl px-4 text-left">
@@ -79,7 +83,8 @@
                     class="w-full rounded-lg border border-slate-700 bg-slate-950 p-3 text-white">
             </div>
 
-            <button type="submit" class="rounded-lg bg-blue-600 px-5 py-3 font-bold text-white hover:bg-blue-500">
+            <button type="submit"
+                class="inline-block rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-400">
                 Create task
             </button>
         </form>
@@ -102,6 +107,11 @@
                 <span class="mt-3 inline-block rounded-full bg-slate-800 px-3 py-1 text-sm text-blue-300">
                     {{ str_replace('_', ' ', ucfirst($task->status)) }}
                 </span>
+
+                <a href="{{ route('tasks.edit', $task) }}"
+                    class="inline-block rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-400">
+                    Edit Task
+                </a>
             </article>
         @empty
             <p class="text-slate-400">

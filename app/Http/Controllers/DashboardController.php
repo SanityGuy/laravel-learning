@@ -29,4 +29,23 @@ class DashboardController extends Controller
 
         return redirect('/')->with('success','Task created successfully!');
     }
+
+    public function edit(Task $task)
+    {
+        return view('tasks.edit', compact('task'));
+    }
+
+    public function update(Request $request, Task $task)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description'=> ['nullable', 'string'],
+            'status' => ['required', 'in:pending,in_progress,completed'],
+            'due_date' => ['nullable', 'date'],
+        ]);
+
+        $task->update($validated);
+
+        return redirect('/')->with('success','Task updated successfully!');
+    }
 }
