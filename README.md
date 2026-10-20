@@ -30,10 +30,10 @@ A task management application built while learning Laravel, PHP, Blade, and data
 - [x] Configure Tailwind CSS and Vite
 - [x] Create the task database table
 - [x] Display tasks from the database
-- [ ] Complete and test task creation
-- [ ] Edit existing tasks
-- [ ] Update task status
-- [ ] Delete tasks
+- [x] Complete and test task creation
+- [x] Edit existing tasks
+- [x] Update task status
+- [x] Delete tasks
 - [ ] Add authentication and user-specific tasks
 - [ ] Deploy the application
 
@@ -41,7 +41,7 @@ A task management application built while learning Laravel, PHP, Blade, and data
 
 This project documents my progress learning Laravel through hands-on development. Features are added incrementally as I learn the framework.
 
-*Status: In development.*
+*Status: In development. Currently in MVP*
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
