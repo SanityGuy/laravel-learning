@@ -205,6 +205,22 @@
 
     <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <section class="mb-8 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+
+            <div class="flex items-center gap-3">
+                <span class="text-sm text-slate-300">
+                    {{ auth()->user()->name }}
+                </span>
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <button type="submit"
+                        class="rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-300 transition hover:border-blue-400/50 hover:text-white">
+                        Sign out
+                    </button>
+                </form>
+            </div>
+
             <div>
                 <p class="eyebrow mb-3">Your workspace / Overview</p>
                 <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
