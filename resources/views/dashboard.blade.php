@@ -323,6 +323,13 @@
                     View GitHub profile
                 </a>
 
+                <hr class="mt-1 border-t border-slate-800">
+
+                <p class="mt-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    TECH STACK
+                </p>
+
+
                 <div class="mt-5 flex flex-wrap gap-2">
                     @foreach ($stack as $tech)
                         <span
@@ -484,10 +491,6 @@
                     </article>
                 @empty
                     <div id="empty-state" class="panel rounded-2xl px-5 py-12 text-center xl:col-span-2">
-                        <div
-                            class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-700 bg-slate-800 text-2xl text-blue-300">
-                            +
-                        </div>
                         <h3 class="text-lg font-bold text-white">Your workspace starts here</h3>
                         <p class="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-400">
                             You haven't created any tasks yet. Add your first task above and get started.
