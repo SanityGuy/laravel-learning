@@ -205,6 +205,22 @@
 
     <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <section class="mb-8 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+
+            <div class="flex items-center gap-3">
+                <span class="text-sm text-slate-300">
+                    {{ auth()->user()->name }}
+                </span>
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <button type="submit"
+                        class="rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-300 transition hover:border-blue-400/50 hover:text-white">
+                        Sign out
+                    </button>
+                </form>
+            </div>
+
             <div>
                 <p class="eyebrow mb-3">Your workspace / Overview</p>
                 <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -322,6 +338,13 @@
                     class="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-blue-300 transition hover:text-blue-200">
                     View GitHub profile
                 </a>
+
+                <hr class="mt-1 border-t border-slate-800">
+
+                <p class="mt-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    TECH STACK
+                </p>
+
 
                 <div class="mt-5 flex flex-wrap gap-2">
                     @foreach ($stack as $tech)
@@ -484,10 +507,6 @@
                     </article>
                 @empty
                     <div id="empty-state" class="panel rounded-2xl px-5 py-12 text-center xl:col-span-2">
-                        <div
-                            class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-700 bg-slate-800 text-2xl text-blue-300">
-                            +
-                        </div>
                         <h3 class="text-lg font-bold text-white">Your workspace starts here</h3>
                         <p class="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-400">
                             You haven't created any tasks yet. Add your first task above and get started.
